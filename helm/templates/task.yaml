@@ -4,6 +4,8 @@ metadata:
   name: stakater-unit-test-dotnet
   labels:
     app.kubernetes.io/version: "{{ .Chart.Version }}"
+  annotations:
+    tekton.dev/displayName: "Unit test dotnet"
 spec:
   steps:
     - image: 'mcr.microsoft.com/dotnet/sdk:6.0'
