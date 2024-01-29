@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: stakater-unit-test-dotnet
+  labels:
+    app.kubernetes.io/version: "{{ .Chart.Version }}"
+spec:
+  steps:
+    - image: 'mcr.microsoft.com/dotnet/sdk:6.0'
+      name: test
+      script: |
+        #!/usr/bin/env sh
+        set -e
+        dotnet restore
+        dotnet build
+        ls *Tests*/*.csproj | while read -r file;
+            do dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover "${file}";
+        done
+      workingDir: $(workspaces.source.path)
+  workspaces:
+    - name: source
