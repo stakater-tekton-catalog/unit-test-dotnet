@@ -8,7 +8,7 @@ metadata:
     tekton.dev/displayName: "Unit test dotnet"
 spec:
   steps:
-    - image: 'mcr.microsoft.com/dotnet/sdk:6.0'
+    - image: 'mcr.microsoft.com/dotnet/sdk:7.0'
       name: test
       script: |
         #!/usr/bin/env sh
