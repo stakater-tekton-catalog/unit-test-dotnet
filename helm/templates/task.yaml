@@ -7,6 +7,10 @@ metadata:
   annotations:
     tekton.dev/displayName: "Unit test dotnet"
 spec:
+  params:
+    - name: PROJECT_FILE_PATH
+      description: project file path
+      default: ./
   steps:
     - image: 'mcr.microsoft.com/dotnet/sdk:8.0'
       name: test
@@ -18,6 +22,6 @@ spec:
         ls *Tests*/*.csproj | while read -r file;
             do dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover "${file}";
         done
-      workingDir: $(workspaces.source.path)
+      workingDir: $(workspaces.source.path)/$(params.PROJECT_FILE_PATH)
   workspaces:
     - name: source
