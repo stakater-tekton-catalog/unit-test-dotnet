@@ -5,7 +5,7 @@ kind: Task
 metadata:
   name: stakater-unit-test-dotnet
   labels:
-    app.kubernetes.io/version: "0.0.3"
+    app.kubernetes.io/version: "0.0.4"
   annotations:
     tekton.dev/displayName: "Unit test dotnet"
 spec:
